@@ -23,7 +23,8 @@ public class Entity {
     }
 
     public void render(Graphics g) {
-        RenderSurface.drawSprite(g, sprite, new Rectangle((int)pos.x, (int)pos.y, w, h));
+        //RenderSurface.drawSprite(g, sprite, new Rectangle((int)pos.x, (int)pos.y, w, h));
+        RenderSurface.drawSprite(g, sprite, Main.renderSurface.cam.getRenderRect(this));
     }
 
 }

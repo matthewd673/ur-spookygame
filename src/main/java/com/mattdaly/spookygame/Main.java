@@ -11,6 +11,8 @@ public class Main {
     static InputManager inputManager;
     static EntityManager entityManager;
 
+    static Ghost ghost;
+
     public static void main(String args[]) {
 
         loadContent();
@@ -18,11 +20,14 @@ public class Main {
         createFrame("SpookyGame", 800, 600);
         entityManager = new EntityManager();
 
+        ghost = new Ghost(50, 50);
+        entityManager.addEntity(ghost);
+
         beginGameLoop();
     }
 
     static void loadContent() {
-        //load all content
+        Sprites.loadSprites();
     }
 
     static void createFrame(String title, int w, int h) {
@@ -33,7 +38,8 @@ public class Main {
         frame.setResizable(false);
 
         //set up rendersurface
-        renderSurface = new RenderSurface(w, h);
+        Camera renderCam = new Camera(new Vector2(0, 0), w, h, 4);
+        renderSurface = new RenderSurface(renderCam);
         frame.add(renderSurface);
 
         //set up inputmanager
@@ -56,6 +62,7 @@ public class Main {
     }
 
     static void update() {
+        entityManager.update();
         renderSurface.repaint();
     }
 
