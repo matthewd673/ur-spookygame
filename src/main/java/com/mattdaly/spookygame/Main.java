@@ -3,15 +3,15 @@ package com.mattdaly.spookygame;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.server.Skeleton;
 
 public class Main {
 
     static JFrame frame;
     static RenderSurface renderSurface;
     static KeyboardManager keyboardManager;
+    static MouseManager mouseManager;
     static EntityManager entityManager;
-
-    static Ghost ghost;
 
     public static void main(String args[]) {
 
@@ -20,8 +20,8 @@ public class Main {
         createFrame("SpookyGame", 800, 600);
         entityManager = new EntityManager();
 
-        ghost = new Ghost(50, 50);
-        entityManager.addEntity(ghost);
+        SkeletonBody skeletonBody = new SkeletonBody(50, 50, true);
+        entityManager.addEntity(skeletonBody);
 
         beginGameLoop();
     }
@@ -42,9 +42,11 @@ public class Main {
         renderSurface = new RenderSurface(renderCam);
         frame.add(renderSurface);
 
-        //set up inputmanager
+        //set up input managers
         keyboardManager = new KeyboardManager();
         frame.addKeyListener(keyboardManager);
+        mouseManager = new MouseManager();
+        frame.addMouseListener(mouseManager);
 
         //display
         frame.setVisible(true);

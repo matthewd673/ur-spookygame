@@ -8,21 +8,21 @@ import java.io.IOException;
 public class Sprites {
 
     public static BufferedImage ghost;
+    public static BufferedImage skeletonBody;
+    public static BufferedImage skeletonHead;
 
     public static void loadSprites() {
 
         try {
 
             ghost = ImageIO.read(new File("res/ghost.png"));
+            skeletonBody = ImageIO.read(new File("res/skeleton-body.png"));
+            skeletonHead = ImageIO.read(new File("res/skeleton-head.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-    }
-
-    public static BufferedImage readImage(String path) throws IOException {
-        return ImageIO.read(new File("res/" + path + ".png"));
     }
 
 }
