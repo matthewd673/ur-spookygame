@@ -8,7 +8,7 @@ public class Main {
 
     static JFrame frame;
     static RenderSurface renderSurface;
-    static InputManager inputManager;
+    static KeyboardManager keyboardManager;
     static EntityManager entityManager;
 
     static Ghost ghost;
@@ -43,8 +43,8 @@ public class Main {
         frame.add(renderSurface);
 
         //set up inputmanager
-        inputManager = new InputManager();
-        frame.addKeyListener(inputManager);
+        keyboardManager = new KeyboardManager();
+        frame.addKeyListener(keyboardManager);
 
         //display
         frame.setVisible(true);

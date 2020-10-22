@@ -1,7 +1,5 @@
 package com.mattdaly.spookygame;
 
-import java.awt.*;
-
 public class Ghost extends Entity {
 
     float speed = 2;
@@ -12,13 +10,13 @@ public class Ghost extends Entity {
 
     public void update() {
 
-        if(Main.inputManager.isKeyPressed('w'))
+        if(Main.keyboardManager.isKeyPressed('w'))
             pos.y -= speed;
-        if(Main.inputManager.isKeyPressed('a'))
+        if(Main.keyboardManager.isKeyPressed('a'))
             pos.x -= speed;
-        if(Main.inputManager.isKeyPressed('s'))
+        if(Main.keyboardManager.isKeyPressed('s'))
             pos.y += speed;
-        if(Main.inputManager.isKeyPressed('d'))
+        if(Main.keyboardManager.isKeyPressed('d'))
             pos.x += speed;
 
         super.update();

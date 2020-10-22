@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class InputManager implements KeyListener {
+public class KeyboardManager implements KeyListener {
 
     ArrayList<Character> pressedChars = new ArrayList<Character>();
 
