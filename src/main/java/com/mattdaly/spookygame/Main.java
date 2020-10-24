@@ -20,8 +20,10 @@ public class Main {
         createFrame("SpookyGame", 800, 600);
         entityManager = new EntityManager();
 
-        SkeletonBody skeletonBody = new SkeletonBody(50, 50, true);
+        SkeletonHead skeletonHead = new SkeletonHead(50, 50);
+        SkeletonBody skeletonBody = new SkeletonBody(50, 50, skeletonHead);
         entityManager.addEntity(skeletonBody);
+        entityManager.addEntity(skeletonHead);
 
         beginGameLoop();
     }

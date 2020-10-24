@@ -6,4 +6,7 @@ public class SkeletonHead extends Entity {
         super(Sprites.skeletonHead, new Vector2(x, y), 8, 8);
     }
 
+    public void update() {
+        Main.frame.setTitle(pos.x + ", " + pos.y);
+    }
 }

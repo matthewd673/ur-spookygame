@@ -7,14 +7,17 @@ public class SkeletonBody extends Entity {
     boolean hasHead = false;
     SkeletonHead head;
 
-    public SkeletonBody(float x, float y, boolean hasHead) {
+    public SkeletonBody(float x, float y, SkeletonHead head) {
         super(Sprites.skeletonBody, new Vector2(x, y), 12, 32);
 
         //initialize head
-        this.hasHead = hasHead;
-        if(hasHead) {
-            head = new SkeletonHead(x, y);
-            Main.entityManager.addEntity(head);
+        if(head != null) {
+            hasHead = true;
+            this.head = head;
+        }
+        else {
+            hasHead = false;
+            this.head = null;
         }
     }
 
@@ -28,11 +31,27 @@ public class SkeletonBody extends Entity {
             pos.y += speed;
         if(Main.keyboardManager.isKeyPressed('d'))
             pos.x += speed;
+        if(Main.keyboardManager.isKeyPressed('e'))
+            dropHead();
+
+        //lock head to body (if its supposed to be attached)
+        if(hasHead)
+            head.pos = pos;
 
         //camera follow
         Main.renderSurface.cam.lockToEntity(this);
 
         super.update();
+    }
+
+    public void dropHead() {
+        hasHead = false;
+        head = null;
+    }
+
+    public void pickupHead(SkeletonHead newHead) {
+        hasHead = true;
+        head = newHead;
     }
 
 }
