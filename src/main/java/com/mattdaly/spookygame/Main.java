@@ -13,6 +13,8 @@ public class Main {
     static MouseManager mouseManager;
     static EntityManager entityManager;
 
+    static World world;
+
     public static void main(String args[]) {
 
         loadContent();
@@ -20,6 +22,12 @@ public class Main {
         createFrame("SpookyGame", 800, 600);
         entityManager = new EntityManager();
 
+        //world generator
+        world = new World(3000, 3000);
+        world.placeGrass(100);
+        world.placeGraves(50);
+
+        //make skeleton
         SkeletonHead skeletonHead = new SkeletonHead(50, 50);
         SkeletonBody skeletonBody = new SkeletonBody(50, 50, skeletonHead);
         entityManager.addEntity(skeletonBody);

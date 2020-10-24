@@ -14,8 +14,15 @@ public class Entity {
     public Entity(BufferedImage sprite, Vector2 pos, int w, int h) {
         this.sprite = sprite;
         this.pos = pos;
-        this.w = w;
-        this.h = h;
+
+        if(w == 0)
+            this.w = sprite.getWidth();
+        else
+            this.w = w;
+        if(h == 0)
+            this.h = sprite.getHeight();
+        else
+            this.h = h;
     }
 
     public void update() {

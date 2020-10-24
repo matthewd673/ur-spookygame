@@ -2,13 +2,13 @@ package com.mattdaly.spookygame;
 
 public class SkeletonBody extends Entity {
 
-    float speed = 2f;
+    float speed = 5f;
 
     boolean hasHead = false;
     SkeletonHead head;
 
     public SkeletonBody(float x, float y, SkeletonHead head) {
-        super(Sprites.skeletonBody, new Vector2(x, y), 12, 32);
+        super(Sprites.skeletonBody, new Vector2(x, y), 0, 0);
 
         //initialize head
         if(head != null) {
