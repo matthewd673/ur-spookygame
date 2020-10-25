@@ -11,6 +11,8 @@ public class RenderSurface extends JComponent {
     int w;
     int h;
 
+    boolean drawColliders = true;
+
     public RenderSurface(Camera cam) {
         this.cam = cam;
         w = cam.w;
@@ -24,6 +26,8 @@ public class RenderSurface extends JComponent {
 
         for(Entity e : Main.entityManager.entityList) {
             e.render(g);
+            if(drawColliders)
+                e.renderCollider(g);
         }
 
         //DEBUG OUTPUT
@@ -52,6 +56,11 @@ public class RenderSurface extends JComponent {
     public static void fillRectangle(Graphics g, Rectangle rect, Color color) {
         g.setColor(color);
         g.fillRect(rect.x, rect.y, rect.width, rect.height);
+    }
+
+    public static void drawRectangle(Graphics g, Rectangle rect, Color color) {
+        g.setColor(color);
+        g.drawRect(rect.x, rect.y, rect.width, rect.height);
     }
 
 }

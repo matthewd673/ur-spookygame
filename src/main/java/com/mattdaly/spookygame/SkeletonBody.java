@@ -1,14 +1,19 @@
 package com.mattdaly.spookygame;
 
+import java.awt.*;
+
 public class SkeletonBody extends Entity {
 
-    float speed = 5f;
+    float speed = 4f;
 
     boolean hasHead = false;
     SkeletonHead head;
 
     public SkeletonBody(float x, float y, SkeletonHead head) {
         super(Sprites.skeletonBody, new Vector2(x, y), 0, 0);
+
+        //create collider
+        col = new Collider(new Rectangle(0, 0, w, h / 2), false, 0, 84);
 
         //initialize head
         if(head != null) {
@@ -23,14 +28,15 @@ public class SkeletonBody extends Entity {
 
     public void update() {
 
+
         if(Main.keyboardManager.isKeyPressed('w'))
-            pos.y -= speed;
+            move(pos.x, pos.y - speed);
         if(Main.keyboardManager.isKeyPressed('a'))
-            pos.x -= speed;
+            move(pos.x - speed, pos.y);
         if(Main.keyboardManager.isKeyPressed('s'))
-            pos.y += speed;
+            move(pos.x, pos.y + speed);
         if(Main.keyboardManager.isKeyPressed('d'))
-            pos.x += speed;
+            move(pos.x + speed, pos.y);
         if(Main.keyboardManager.isKeyPressed('e'))
             dropHead();
 
