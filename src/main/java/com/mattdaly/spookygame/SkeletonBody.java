@@ -13,7 +13,7 @@ public class SkeletonBody extends Entity {
         super(Sprites.skeletonBody, new Vector2(x, y), 0, 0);
 
         //create collider
-        col = new Collider(new Rectangle(0, 0, w, h / 2), false, 0, 84);
+        col = new Collider(new FRect(0, 0, w, h / 2), false, 0, 84);
 
         //initialize head
         if(head != null) {

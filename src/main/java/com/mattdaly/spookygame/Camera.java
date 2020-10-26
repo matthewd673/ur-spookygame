@@ -35,4 +35,8 @@ public class Camera {
         return new Rectangle((int)(r.x - pos.x), (int)(r.y - pos.y), r.width * scale, r.height * scale);
     }
 
+    public Rectangle getRenderRect(FRect r) {
+        return new Rectangle((int)(r.x - pos.x), (int)(r.y - pos.y), r.width * scale, r.height * scale);
+    }
+
 }

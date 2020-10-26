@@ -44,7 +44,7 @@ public class Entity {
 
         int intersectingCt = 0;
 
-        Rectangle newRect = new Rectangle((int)(newX + col.offX), (int)(newY + col.offY), w, h);
+        FRect newRect = new FRect(newX + col.offX, newY + col.offY, w, h);
 
         for(Entity e : Main.entityManager.entityList) {
             //if(e.col == null || e == this || e.col.trigger)
