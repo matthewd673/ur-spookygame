@@ -23,7 +23,7 @@ public class Main {
         entityManager = new EntityManager();
 
         //world generator
-        world = new World(3000, 3000);
+        world = new World(1000, 1000);
         world.placeGrass(100);
         world.placeGraves(50);
 
@@ -48,7 +48,7 @@ public class Main {
         frame.setResizable(false);
 
         //set up rendersurface
-        Camera renderCam = new Camera(new Vector2(0, 0), w, h, 4);
+        Camera renderCam = new Camera(new Vector2(0, 0), w, h, 2);
         renderSurface = new RenderSurface(renderCam);
         frame.add(renderSurface);
 

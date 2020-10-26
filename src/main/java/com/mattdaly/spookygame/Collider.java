@@ -4,26 +4,27 @@ import java.awt.*;
 
 public class Collider {
 
-    public FRect hitbox;
     public boolean trigger;
+
+    public float x;
+    public float y;
+    public int w;
+    public int h;
 
     public float offX;
     public float offY;
 
-    public Collider(FRect hitbox, boolean trigger, float offX, float offY) {
-        this.hitbox = hitbox;
-        this.trigger = trigger;
-
+    public Collider(float offX, float offY, int w, int h, boolean trigger) {
         this.offX = offX;
         this.offY = offY;
+        this.w = w;
+        this.h = h;
+
+        this.trigger = trigger;
     }
 
-    public static boolean detectCollision(FRect a, FRect b) {
-        int scale = Main.renderSurface.cam.scale;
-        return (a.x < b.x + b.width &&
-                a.x + a.width > b.x &&
-                a.y < b.y + b.height &&
-                a.y + a.height > b.y);
+    public static boolean detectCollision(float aX, float aY, int aW, int aH, float bX, float bY, int bW, int bH) {
+        return (aX < bX + bW && aX + aW > bX && aY < bY + bH && aY + aH > bY);
     }
 
 }

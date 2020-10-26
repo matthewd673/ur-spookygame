@@ -33,8 +33,8 @@ public class Entity {
 
     public void update() {
         if(col != null) {
-            col.hitbox.x = (int)(pos.x + col.offX);
-            col.hitbox.y = (int)(pos.y + col.offY);
+            col.x = pos.x + col.offX;
+            col.y = pos.y + col.offY;
         }
     }
 
@@ -44,13 +44,11 @@ public class Entity {
 
         int intersectingCt = 0;
 
-        FRect newRect = new FRect(newX + col.offX, newY + col.offY, w, h);
-
         for(Entity e : Main.entityManager.entityList) {
             //if(e.col == null || e == this || e.col.trigger)
                 //continue;
             if(e.col != null && e != this && !e.col.trigger) {
-                if (Collider.detectCollision(newRect, e.col.hitbox))
+                if (Collider.detectCollision(newX + col.offX, newY + col.offY, col.w, col.h, e.col.x, e.col.y, e.col.w, e.col.h))
                     intersectingCt++;
             }
         }
@@ -76,7 +74,7 @@ public class Entity {
         if(col.trigger)
             drawColor = Color.YELLOW;
 
-        RenderSurface.drawRectangle(g, Main.renderSurface.cam.getRenderRect(col.hitbox), drawColor);
+        RenderSurface.drawRectangle(g, Main.renderSurface.cam.getRenderRect(col.x, col.y, col.w, col.h), drawColor);
     }
 
 }

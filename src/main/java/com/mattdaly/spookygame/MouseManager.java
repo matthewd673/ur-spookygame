@@ -1,5 +1,6 @@
 package com.mattdaly.spookygame;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -9,8 +10,14 @@ public class MouseManager implements MouseListener {
     public boolean rightDown = false;
     public boolean middleDown = false;
 
+    int mOffX = 8;
+    int mOffY = 30;
+
     public Vector2 getMousePos() {
-        return new Vector2(Main.frame.getMousePosition().x, Main.frame.getMousePosition().y);
+        //return Main.renderSurface.cam.getMouseToWorldPoint(Main.renderSurface.getMousePosition());
+        //return Main.renderSurface.cam.getMouseToWorldPoint(new Vector2(mX, mY));
+        Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+        return new Vector2(mousePoint.x - Main.frame.getX() - mOffX, mousePoint.y - Main.frame.getY() - mOffY);
     }
 
     @Override
