@@ -15,8 +15,8 @@ public class Velocity {
 
     public void setAngle(float angle) {
         this.angle = angle;
-        this.vX = (float)Math.sin(angle) * speed;
-        this.vY = (float)Math.cos(angle) * speed;
+        this.vX = (float)Math.cos(angle) * -speed;
+        this.vY = (float)Math.sin(angle) * -speed;
     }
 
     public static float calculateAngleBetweenPoints(Vector2 a, Vector2 b) {
