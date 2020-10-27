@@ -14,8 +14,6 @@ public class MouseManager implements MouseListener {
     int mOffY = 30;
 
     public Vector2 getMousePos() {
-        //return Main.renderSurface.cam.getMouseToWorldPoint(Main.renderSurface.getMousePosition());
-        //return Main.renderSurface.cam.getMouseToWorldPoint(new Vector2(mX, mY));
         Point mousePoint = MouseInfo.getPointerInfo().getLocation();
         return new Vector2(mousePoint.x - Main.frame.getX() - mOffX, mousePoint.y - Main.frame.getY() - mOffY);
     }

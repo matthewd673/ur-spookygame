@@ -13,6 +13,8 @@ public class Entity {
 
     public Collider col;
 
+    public Velocity v;
+
     public Entity(BufferedImage sprite, Vector2 pos, int w, int h) {
         this.sprite = sprite;
         this.pos = pos;
@@ -25,6 +27,8 @@ public class Entity {
             this.h = sprite.getHeight();
         else
             this.h = h;
+
+        Velocity v = new Velocity(0, 0);
     }
 
     public void setCollider(Collider col) {
@@ -32,6 +36,11 @@ public class Entity {
     }
 
     public void update() {
+        //apply velocity
+        if(v != null)
+            move(pos.x + v.vX, pos.y + v.vY);
+
+        //update collider position
         if(col != null) {
             col.x = pos.x + col.offX;
             col.y = pos.y + col.offY;
@@ -39,8 +48,10 @@ public class Entity {
     }
 
     public boolean move(float newX, float newY) {
-        if(col != null && col.trigger)
+        if(col == null || col.trigger) {
+            pos = new Vector2(newX, newY);
             return true;
+        }
 
         int intersectingCt = 0;
 

@@ -30,6 +30,7 @@ public class SkeletonBody extends Entity {
     public void update() {
 
 
+        //keyboard input
         if(Main.keyboardManager.isKeyPressed('w'))
             move(pos.x, pos.y - speed);
         if(Main.keyboardManager.isKeyPressed('a'))
@@ -40,6 +41,16 @@ public class SkeletonBody extends Entity {
             move(pos.x + speed, pos.y);
         if(Main.keyboardManager.isKeyPressed('e'))
             dropHead();
+
+        //mouse input
+        if(Main.mouseManager.leftDown) {
+            //throw head
+            if(hasHead && head != null) {
+                float angleToMouse = Velocity.calculateAngleBetweenPoints(head.pos, Main.renderSurface.cam.getMouseToWorldPoint(Main.mouseManager.getMousePos()));
+                head.v = new Velocity(5, angleToMouse);
+                dropHead();
+            }
+        }
 
         //lock head to body (if its supposed to be attached)
         if(hasHead)
