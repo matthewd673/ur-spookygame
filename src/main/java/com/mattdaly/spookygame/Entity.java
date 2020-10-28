@@ -21,6 +21,7 @@ public class Entity {
         Fence,
         Grass,
         Grave,
+        Particle,
     }
 
     public EntityType eType;
