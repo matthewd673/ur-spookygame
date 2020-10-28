@@ -24,8 +24,10 @@ public class Main {
 
         //world generator
         world = new World(1000, 1000);
-        world.placeGrass(100);
+        world.tileWorld();
+        world.placeGrass(300);
         world.placeGraves(50);
+
 
         //make skeleton
         SkeletonHead skeletonHead = new SkeletonHead(null, 50, 50);

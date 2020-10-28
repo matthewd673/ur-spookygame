@@ -22,6 +22,9 @@ public class Entity {
         Grass,
         Grave,
         Particle,
+        Dirt,
+        GrassyDirt,
+        TopFence
     }
 
     public EntityType eType;
