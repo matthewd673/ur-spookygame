@@ -15,7 +15,18 @@ public class Entity {
 
     public Velocity v;
 
-    public Entity(BufferedImage sprite, Vector2 pos, int w, int h) {
+    public enum EntityType {
+        SkeletonBody,
+        SkeletonHead,
+        Fence,
+        Grass,
+        Grave,
+    }
+
+    public EntityType eType;
+
+    public Entity(EntityType eType, BufferedImage sprite, Vector2 pos, int w, int h) {
+        this.eType = eType;
         this.sprite = sprite;
         this.pos = pos;
 

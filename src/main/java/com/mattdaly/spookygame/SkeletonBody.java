@@ -10,7 +10,7 @@ public class SkeletonBody extends Entity {
     SkeletonHead head;
 
     public SkeletonBody(float x, float y, SkeletonHead head) {
-        super(Sprites.skeletonBody, new Vector2(x, y), 0, 0);
+        super(EntityType.SkeletonBody, Sprites.skeletonBody, new Vector2(x, y), 0, 0);
 
         //create collider
         //col = new Collider(new FRect(0, 0, w, h / 2), false, 0, 84);
@@ -18,6 +18,7 @@ public class SkeletonBody extends Entity {
 
         //initialize head
         if(head != null) {
+            head.lastBody = this;
             hasHead = true;
             this.head = head;
         }
@@ -70,6 +71,7 @@ public class SkeletonBody extends Entity {
     public void pickupHead(SkeletonHead newHead) {
         hasHead = true;
         head = newHead;
+        head.lastBody = this;
     }
 
 }
