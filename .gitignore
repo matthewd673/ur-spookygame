@@ -1,5 +1,5 @@
-#IGNORE .DS_STORE FILES
-.DS_Stores
+#IGNORE DS_STORE
+.DS_Store
 
 # JAVA GITIGNORE
 # Compiled class file
