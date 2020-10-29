@@ -12,11 +12,11 @@ public class Level {
 
     ArrayList<String[]> rows;
 
+    public Level nextLevel;
 
     public Level(String lev){
         rows = new ArrayList<>();
         split(lev);
-
     }
 
     //takes input from a text file and splits it into an ArrayList

@@ -11,7 +11,7 @@ public class RenderSurface extends JComponent {
     int w;
     int h;
 
-    boolean drawColliders = true;
+    boolean drawColliders = false;
 
     public RenderSurface(Camera cam) {
         this.cam = cam;

@@ -17,8 +17,11 @@ public class World {
     Random rng;
 
     //load levels here
-    private Level level1;
-    private Level level2;
+    public static Level level1;
+    public static Level level2;
+
+    public Level currentLevel = null;
+
     public World(int w, int h) {
         this.w = w;
         this.h = h;
@@ -27,6 +30,8 @@ public class World {
 
         level1 = new Level("level1.txt");
         level2 = new Level("level2.txt");
+
+        level1.nextLevel = level2;
     }
 
     public void placeGrass(int grassCt) {
@@ -48,7 +53,7 @@ public class World {
     }
 
     //this method adds tiles to the entity manager from a text file
-    public void tileWorld(){
+    public void tileWorld(Level level){
 
         //by splitting the entities into 2 queues we can do cheap z-sorting
         //this is hardly a permanent solution
@@ -58,10 +63,10 @@ public class World {
 
         int x = 0;
         int y = 0;
-        for(int i = 0; i < level1.rows.size(); i++) {
-            for(int j = 0; j < level1.rows.get(i).length; j++) {
+        for(int i = 0; i < level.rows.size(); i++) {
+            for(int j = 0; j < level.rows.get(i).length; j++) {
 
-                String currentTile = level1.rows.get(i)[j];
+                String currentTile = level.rows.get(i)[j];
 
                 switch (currentTile) {
                     //add board tiles here
@@ -116,6 +121,13 @@ public class World {
             Main.entityManager.addEntity(e);
         for(Entity e : priorityEntities) //priority is now foreground
             Main.entityManager.addEntity(e);
+    }
+
+    public void switchLevel(Level nextLevel) {
+        currentLevel = nextLevel;
+        //clear current entities and repopulate
+        Main.entityManager.clearEntities();
+        tileWorld(currentLevel);
     }
 
 }

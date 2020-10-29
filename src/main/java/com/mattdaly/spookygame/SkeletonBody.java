@@ -4,10 +4,12 @@ import java.awt.*;
 
 public class SkeletonBody extends Entity {
 
-    float speed = 2f;
+    float speed = 4f;
 
     boolean hasHead = false;
     SkeletonHead head;
+
+    boolean hasBeenControlled = false;
 
     Collider walkCollider;
 
@@ -75,14 +77,22 @@ public class SkeletonBody extends Entity {
 
     void handleKeyboardInput() {
         //keyboard input
-        if(Main.keyboardManager.isKeyPressed('w'))
+        if(Main.keyboardManager.isKeyPressed('w')) {
+            hasBeenControlled = true;
             move(pos.x, pos.y - speed, walkCollider);
-        if(Main.keyboardManager.isKeyPressed('a'))
+        }
+        if(Main.keyboardManager.isKeyPressed('a')) {
+            hasBeenControlled = true;
             move(pos.x - speed, pos.y, walkCollider);
-        if(Main.keyboardManager.isKeyPressed('s'))
+        }
+        if(Main.keyboardManager.isKeyPressed('s')) {
+            hasBeenControlled = true;
             move(pos.x, pos.y + speed, walkCollider);
-        if(Main.keyboardManager.isKeyPressed('d'))
+        }
+        if(Main.keyboardManager.isKeyPressed('d')) {
+            hasBeenControlled = true;
             move(pos.x + speed, pos.y, walkCollider);
+        }
     }
 
 }

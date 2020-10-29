@@ -24,9 +24,11 @@ public class Main {
 
         //world generator
         world = new World(1000, 1000);
-        world.tileWorld();
+        world.switchLevel(World.level1);
+        /*
         world.placeGrass(300);
         world.placeGraves(50);
+         */
 
         beginGameLoop();
     }
