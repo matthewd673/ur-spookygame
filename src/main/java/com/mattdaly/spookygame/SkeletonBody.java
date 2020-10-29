@@ -30,18 +30,10 @@ public class SkeletonBody extends Entity {
 
     public void update() {
 
+        //handle keyboard input (if has head)
+        if(hasHead)
+            handleKeyboardInput();
 
-        //keyboard input
-        if(Main.keyboardManager.isKeyPressed('w'))
-            move(pos.x, pos.y - speed);
-        if(Main.keyboardManager.isKeyPressed('a'))
-            move(pos.x - speed, pos.y);
-        if(Main.keyboardManager.isKeyPressed('s'))
-            move(pos.x, pos.y + speed);
-        if(Main.keyboardManager.isKeyPressed('d'))
-            move(pos.x + speed, pos.y);
-        if(Main.keyboardManager.isKeyPressed('e'))
-            dropHead();
 
         //mouse input
         if(Main.mouseManager.leftDown) {
@@ -72,6 +64,20 @@ public class SkeletonBody extends Entity {
         hasHead = true;
         head = newHead;
         head.lastBody = this;
+        head.v = new Velocity(0, 0);
+        head.timeInAir = 0;
+    }
+
+    void handleKeyboardInput() {
+        //keyboard input
+        if(Main.keyboardManager.isKeyPressed('w'))
+            move(pos.x, pos.y - speed);
+        if(Main.keyboardManager.isKeyPressed('a'))
+            move(pos.x - speed, pos.y);
+        if(Main.keyboardManager.isKeyPressed('s'))
+            move(pos.x, pos.y + speed);
+        if(Main.keyboardManager.isKeyPressed('d'))
+            move(pos.x + speed, pos.y);
     }
 
 }

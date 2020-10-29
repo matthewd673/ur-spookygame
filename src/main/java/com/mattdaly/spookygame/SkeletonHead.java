@@ -6,6 +6,9 @@ public class SkeletonHead extends Entity {
 
     SkeletonBody lastBody;
 
+    int timeInAir = 0;
+    int maxTimeInAir = 120;
+
     public SkeletonHead(SkeletonBody lastBody, float x, float y) {
         super(EntityType.SkeletonHead, Sprites.skeletonHead, new Vector2(x, y), 0, 0);
         this.lastBody = lastBody;
@@ -13,6 +16,12 @@ public class SkeletonHead extends Entity {
     }
 
     public void update() {
+
+        if(!lastBody.hasHead)
+            timeInAir++;
+
+        if(timeInAir > maxTimeInAir)
+            breakHead();
 
         //check collisions if head off body
         if(!lastBody.hasHead) {
@@ -24,9 +33,9 @@ public class SkeletonHead extends Entity {
                 if (Collider.detectCollision(col.x, col.y, col.w, col.h, e.col.x, e.col.y, e.col.w, e.col.h)) {
                     switch (e.eType) {
                         case Grave: //hit a grave and explode
-                            ParticleSystem headParticles = new ParticleSystem(col.x + 4, col.y + 4, 200, new Color(239, 105, 47));
-
-                            lastBody.pickupHead(this);
+                        case Fence:
+                        case TopFence:
+                            breakHead();
                             break;
                     }
                 }
@@ -35,6 +44,12 @@ public class SkeletonHead extends Entity {
         }
 
         super.update();
+    }
+
+    public void breakHead() {
+        ParticleSystem headParticles = new ParticleSystem(col.x + 4, col.y + 4, 200, new Color(239, 105, 47));
+
+        lastBody.pickupHead(this);
     }
 
 }
