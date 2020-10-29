@@ -54,8 +54,9 @@ public class World {
         for(int i = 0; i < level1.rows.size(); i++) {
             for(int j = 0; j < level1.rows.get(i).length; j++) {
 
+                String currentTile = level1.rows.get(i)[j];
 
-                switch (level1.rows.get(i)[j]) {
+                switch (currentTile) {
                     //add board tiles here
                     case "d":
                         Dirt dirt = new Dirt(x, y);
@@ -69,8 +70,18 @@ public class World {
                         TopFence topFence = new TopFence(x, y);
                         Main.entityManager.addEntity(topFence);
                         break;
+                    case "H":
+                        SkeletonHead head = new SkeletonHead(null, x, y);
+                        SkeletonBody bodyWithHead = new SkeletonBody(x, y, head);
+                        Main.entityManager.addEntity(head);
+                        Main.entityManager.addEntity(bodyWithHead);
+                        break;
+                    case "B":
+                        SkeletonBody body = new SkeletonBody(x, y, null);
+                        Main.entityManager.addEntity(body);
+                        break;
                     default:
-                        System.out.println("invalid board tile");
+                        System.out.println("Invalid board tile: " + currentTile);
                 }
 
                 x += 32;

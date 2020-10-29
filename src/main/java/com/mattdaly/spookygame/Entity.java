@@ -62,8 +62,8 @@ public class Entity {
         }
     }
 
-    public boolean move(float newX, float newY) {
-        if(col == null || col.trigger) {
+    public boolean move(float newX, float newY, Collider c) {
+        if(c == null || c.trigger) {
             pos = new Vector2(newX, newY);
             return true;
         }
@@ -74,7 +74,7 @@ public class Entity {
             //if(e.col == null || e == this || e.col.trigger)
                 //continue;
             if(e.col != null && e != this && !e.col.trigger) {
-                if (Collider.detectCollision(newX + col.offX, newY + col.offY, col.w, col.h, e.col.x, e.col.y, e.col.w, e.col.h))
+                if (Collider.detectCollision(newX + c.offX, newY + c.offY, c.w, c.h, e.col.x, e.col.y, e.col.w, e.col.h))
                     intersectingCt++;
             }
         }
@@ -86,6 +86,9 @@ public class Entity {
 
         return false;
 
+    }
+    public boolean move(float newX, float newY) {
+        return move(newX, newY, col);
     }
 
     public void render(Graphics g) {

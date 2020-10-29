@@ -17,8 +17,10 @@ public class SkeletonHead extends Entity {
 
     public void update() {
 
-        if(!lastBody.hasHead)
+        if(!lastBody.hasHead) {
             timeInAir++;
+            Main.renderSurface.cam.lockToEntity(this);
+        }
 
         if(timeInAir > maxTimeInAir)
             breakHead();
@@ -36,6 +38,11 @@ public class SkeletonHead extends Entity {
                         case Fence:
                         case TopFence:
                             breakHead();
+                            break;
+                        case SkeletonBody: //hit a body and get picked up
+                            SkeletonBody contactBody = (SkeletonBody)e;
+                            if(contactBody != lastBody) //make sure its a new body
+                                contactBody.pickupHead(this);
                             break;
                     }
                 }

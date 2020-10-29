@@ -9,18 +9,19 @@ public class SkeletonBody extends Entity {
     boolean hasHead = false;
     SkeletonHead head;
 
+    Collider walkCollider;
+
     public SkeletonBody(float x, float y, SkeletonHead head) {
         super(EntityType.SkeletonBody, Sprites.skeletonBody, new Vector2(x, y), 0, 0);
 
         //create collider
         //col = new Collider(new FRect(0, 0, w, h / 2), false, 0, 84);
-        col = new Collider(0, 34, 18, 8, false);
+        col = new Collider(0, 0, 18, 42, true);
+        walkCollider = new Collider(0, 34, 18, 8, false);
 
         //initialize head
         if(head != null) {
-            head.lastBody = this;
-            hasHead = true;
-            this.head = head;
+            pickupHead(head);
         }
         else {
             hasHead = false;
@@ -31,9 +32,12 @@ public class SkeletonBody extends Entity {
     public void update() {
 
         //handle keyboard input (if has head)
-        if(hasHead)
+        if(hasHead) {
+            //update walk collider
+            walkCollider.x = pos.x + walkCollider.offX;
+            walkCollider.y = pos.y + walkCollider.offY;
             handleKeyboardInput();
-
+        }
 
         //mouse input
         if(Main.mouseManager.leftDown) {
@@ -50,7 +54,8 @@ public class SkeletonBody extends Entity {
             head.pos = pos;
 
         //camera follow
-        Main.renderSurface.cam.lockToEntity(this);
+        if(hasHead)
+            Main.renderSurface.cam.lockToEntity(this);
 
         super.update();
     }
@@ -71,13 +76,13 @@ public class SkeletonBody extends Entity {
     void handleKeyboardInput() {
         //keyboard input
         if(Main.keyboardManager.isKeyPressed('w'))
-            move(pos.x, pos.y - speed);
+            move(pos.x, pos.y - speed, walkCollider);
         if(Main.keyboardManager.isKeyPressed('a'))
-            move(pos.x - speed, pos.y);
+            move(pos.x - speed, pos.y, walkCollider);
         if(Main.keyboardManager.isKeyPressed('s'))
-            move(pos.x, pos.y + speed);
+            move(pos.x, pos.y + speed, walkCollider);
         if(Main.keyboardManager.isKeyPressed('d'))
-            move(pos.x + speed, pos.y);
+            move(pos.x + speed, pos.y, walkCollider);
     }
 
 }
