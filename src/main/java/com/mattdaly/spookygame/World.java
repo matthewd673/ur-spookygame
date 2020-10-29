@@ -7,6 +7,7 @@
 package com.mattdaly.spookygame;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 public class World {
 
@@ -49,6 +50,12 @@ public class World {
     //this method adds tiles to the entity manager from a text file
     public void tileWorld(){
 
+        //by splitting the entities into 2 queues we can do cheap z-sorting
+        //this is hardly a permanent solution
+        //but it kinda works and im kinda lazy so...
+        ArrayList<Entity> priorityEntities = new ArrayList<Entity>(); //ADD FOREGROUND ENTITIES HERE
+        ArrayList<Entity> backgroundEntities = new ArrayList<Entity>();
+
         int x = 0;
         int y = 0;
         for(int i = 0; i < level1.rows.size(); i++) {
@@ -58,27 +65,41 @@ public class World {
 
                 switch (currentTile) {
                     //add board tiles here
-                    case "d":
+                    case "d": //DIRT
                         Dirt dirt = new Dirt(x, y);
-                        Main.entityManager.addEntity(dirt);
+                        backgroundEntities.add(dirt);
                         break;
-                    case "g":
+                    case "g": //GRASS
                         GrassyDirt gd = new GrassyDirt(x, y);
-                        Main.entityManager.addEntity(gd);
+                        backgroundEntities.add(gd);
                         break;
-                    case "t":
+                    case "t": //TOP FENCE
                         TopFence topFence = new TopFence(x, y);
-                        Main.entityManager.addEntity(topFence);
+                        backgroundEntities.add(topFence);
                         break;
-                    case "H":
+                    case "p": //PIT
+                        Pit pit = new Pit(x, y);
+                        backgroundEntities.add(pit);
+                        break;
+                    case "H": //BODY WITH HEAD
                         SkeletonHead head = new SkeletonHead(null, x, y);
                         SkeletonBody bodyWithHead = new SkeletonBody(x, y, head);
-                        Main.entityManager.addEntity(head);
-                        Main.entityManager.addEntity(bodyWithHead);
+                        priorityEntities.add(head);
+                        priorityEntities.add(bodyWithHead);
+                        //spawn backing dirt
+                        Dirt hBackDirt = new Dirt(x, y);
+                        backgroundEntities.add(hBackDirt);
                         break;
-                    case "B":
+                    case "B": //BODY
                         SkeletonBody body = new SkeletonBody(x, y, null);
-                        Main.entityManager.addEntity(body);
+                        priorityEntities.add(body);
+                        //spawn backing dirt
+                        Dirt bBackDirt = new Dirt(x, y);
+                        backgroundEntities.add(bBackDirt);
+                        break;
+                    case "E": //END
+                        End end = new End(x, y);
+                        backgroundEntities.add(end);
                         break;
                     default:
                         System.out.println("Invalid board tile: " + currentTile);
@@ -89,6 +110,12 @@ public class World {
             y += 32;
             x = 0;
         }
+
+        //add entities from queues
+        for(Entity e : backgroundEntities) //background first so they get sorted back
+            Main.entityManager.addEntity(e);
+        for(Entity e : priorityEntities) //priority is now foreground
+            Main.entityManager.addEntity(e);
     }
 
 }

@@ -28,14 +28,6 @@ public class Main {
         world.placeGrass(300);
         world.placeGraves(50);
 
-
-        //make skeleton
-        /*
-        SkeletonHead skeletonHead = new SkeletonHead(null, 50, 50);
-        SkeletonBody skeletonBody = new SkeletonBody(50, 50, skeletonHead);
-        entityManager.addEntity(skeletonBody);
-        entityManager.addEntity(skeletonHead);
-         */
         beginGameLoop();
     }
 

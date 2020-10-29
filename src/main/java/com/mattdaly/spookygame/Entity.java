@@ -24,7 +24,9 @@ public class Entity {
         Particle,
         Dirt,
         GrassyDirt,
-        TopFence
+        TopFence,
+        Pit,
+        End,
     }
 
     public EntityType eType;

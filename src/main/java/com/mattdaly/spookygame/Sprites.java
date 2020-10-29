@@ -15,7 +15,8 @@ public class Sprites {
     public static BufferedImage dirt;
     public static BufferedImage grassyDirt;
     public static BufferedImage topFence;
-
+    public static BufferedImage pit;
+    public static BufferedImage end;
 
     public static void loadSprites() {
 
@@ -29,6 +30,8 @@ public class Sprites {
             dirt = ImageIO.read(new File("res/dirt.png"));
             grassyDirt = ImageIO.read(new File("res/grassyDirt.png"));
             topFence = ImageIO.read(new File("res/topFence.png"));
+            pit = ImageIO.read(new File("res/pit.png"));
+            end = ImageIO.read(new File("res/end.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
