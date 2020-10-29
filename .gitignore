@@ -1,5 +1,6 @@
-#IGNORE DS_STORE
+#IGNORE MISC UNNECESSARY
 .DS_Store
+*.aseprite
 
 # JAVA GITIGNORE
 # Compiled class file
