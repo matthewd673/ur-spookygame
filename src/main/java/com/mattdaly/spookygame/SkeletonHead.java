@@ -58,7 +58,7 @@ public class SkeletonHead extends Entity {
     }
 
     public void breakHead() {
-        ParticleSystem headParticles = new ParticleSystem(col.x + 4, col.y + 4, 200, new Color(239, 105, 47));
+        ParticleSystem headParticles = new ParticleSystem(col.x + 4, col.y + 4, 20, new Color(239, 105, 47));
 
         lastBody.pickupHead(this);
     }

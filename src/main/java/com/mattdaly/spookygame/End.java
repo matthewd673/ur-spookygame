@@ -6,6 +6,8 @@ public class End extends Entity {
 
     public End(float x, float y) {
         super(EntityType.End, Sprites.end, new Vector2(x, y), 32, 32);
+        forceBackSort = true;
+
         col = new Collider(8, 8, 16, 16, true);
     }
 

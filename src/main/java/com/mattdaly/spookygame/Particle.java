@@ -7,8 +7,8 @@ public class Particle extends Entity {
     Color col;
     int lifetime = 5;
 
-    public Particle(float x, float y, Color col, Velocity v) {
-        super(EntityType.Particle, Sprites.skeletonHead, new Vector2(x, y), 1, 1);
+    public Particle(float x, float y, Color col, Velocity v, int size) {
+        super(EntityType.Particle, Sprites.skeletonHead, new Vector2(x, y), size, size);
 
         this.col = col;
         this.v = v;
@@ -26,7 +26,7 @@ public class Particle extends Entity {
     }
 
     public void render(Graphics g) {
-        RenderSurface.fillRectangle(g, Main.renderSurface.cam.getRenderRect(new Rectangle((int)pos.x, (int)pos.y, 1, 1)), col);
+        RenderSurface.fillRectangle(g, Main.renderSurface.cam.getRenderRect(new Rectangle((int)pos.x, (int)pos.y, w, h)), col);
     }
 
 }

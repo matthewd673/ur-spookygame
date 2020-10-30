@@ -18,6 +18,7 @@ public class Sprites {
     public static BufferedImage pit;
     public static BufferedImage end;
     public static BufferedImage button;
+    public static BufferedImage buttonActivated;
 
     public static void loadSprites() {
 
@@ -34,6 +35,7 @@ public class Sprites {
             pit = ImageIO.read(new File("res/pit.png"));
             end = ImageIO.read(new File("res/end.png"));
             button = ImageIO.read(new File("res/button.png"));
+            buttonActivated = ImageIO.read(new File("res/button-activated.png"));
 
         } catch (IOException e) {
             e.printStackTrace();

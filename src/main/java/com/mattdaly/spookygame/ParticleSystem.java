@@ -15,7 +15,7 @@ public class ParticleSystem {
         for(int i = 0; i < particleCt; i++) {
             float moveAngle = 8 * (ThreadLocalRandom.current().nextFloat() - 1f);
 
-            Particle p = new Particle(x, y, particleColor, new Velocity(10, moveAngle));
+            Particle p = new Particle(x, y, particleColor, new Velocity(10, moveAngle), 3);
             Main.entityManager.addEntity(p);
 
         }

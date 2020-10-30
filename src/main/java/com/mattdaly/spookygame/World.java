@@ -65,12 +65,6 @@ public class World {
     //this method adds tiles to the entity manager from a text file
     public void tileWorld(Level level){
 
-        //by splitting the entities into 2 queues we can do cheap z-sorting
-        //this is hardly a permanent solution
-        //but it kinda works and im kinda lazy so...
-        ArrayList<Entity> priorityEntities = new ArrayList<Entity>(); //ADD FOREGROUND ENTITIES HERE
-        ArrayList<Entity> backgroundEntities = new ArrayList<Entity>();
-
         int x = 0;
         int y = 0;
         for(int i = 0; i < level.rows.size(); i++) {
@@ -82,44 +76,53 @@ public class World {
                     //add board tiles here
                     case "d": //DIRT
                         Dirt dirt = new Dirt(x, y);
-                        backgroundEntities.add(dirt);
-                        placeGrass(6, x, y, 32, 32);
+                        Main.entityManager.addEntity(dirt);
+                        placeGrass(8, x, y, 24, 23);
                         break;
                     case "g": //GRASS
-                        GrassyDirt gd = new GrassyDirt(x, y);
-                        backgroundEntities.add(gd);
+                        //GrassyDirt gd = new GrassyDirt(x, y);
+                        //Main.entityManager.addEntity(gd);
+                        Dirt d = new Dirt(x, y);
+                        Main.entityManager.addEntity(d);
+                        placeGrass(18, x, y, 24, 23);
                         break;
                     case "t": //TOP FENCE
                         TopFence topFence = new TopFence(x, y);
-                        backgroundEntities.add(topFence);
+                        Main.entityManager.addEntity(topFence);
+                        Dirt topFenceDirt = new Dirt(x, y);
+                        Main.entityManager.addEntity(topFenceDirt);
                         break;
                     case "p": //PIT
                         Pit pit = new Pit(x, y);
-                        backgroundEntities.add(pit);
+                        Main.entityManager.addEntity(pit);
                         break;
                     case "S": //button/switch
+                        //Dirt switchDirt = new Dirt(x, y);
+                        //Main.entityManager.addEntity(switchDirt);
                         Switch switchy = new Switch(x, y);
-                        backgroundEntities.add(switchy);
+                        Main.entityManager.addEntity(switchy);
                         break;
                     case "H": //BODY WITH HEAD
                         SkeletonHead head = new SkeletonHead(null, x, y);
                         SkeletonBody bodyWithHead = new SkeletonBody(x, y, head);
-                        priorityEntities.add(head);
-                        priorityEntities.add(bodyWithHead);
+                        Main.entityManager.addEntity(head);
+                        Main.entityManager.addEntity(bodyWithHead);
                         //spawn backing dirt
                         Dirt hBackDirt = new Dirt(x, y);
-                        backgroundEntities.add(hBackDirt);
+                        Main.entityManager.addEntity(hBackDirt);
                         break;
                     case "B": //BODY
                         SkeletonBody body = new SkeletonBody(x, y, null);
-                        priorityEntities.add(body);
+                        Main.entityManager.addEntity(body);
                         //spawn backing dirt
                         Dirt bBackDirt = new Dirt(x, y);
-                        backgroundEntities.add(bBackDirt);
+                        Main.entityManager.addEntity(bBackDirt);
                         break;
                     case "E": //END
+                        Dirt endDirt = new Dirt(x, y);
+                        Main.entityManager.addEntity(endDirt);
                         End end = new End(x, y);
-                        backgroundEntities.add(end);
+                        Main.entityManager.addEntity(end);
                         break;
                     default:
                         System.out.println("Invalid board tile: " + currentTile);
@@ -130,12 +133,6 @@ public class World {
             y += 32;
             x = 0;
         }
-
-        //add entities from queues
-        for(Entity e : backgroundEntities) //background first so they get sorted back
-            Main.entityManager.addEntity(e);
-        for(Entity e : priorityEntities) //priority is now foreground
-            Main.entityManager.addEntity(e);
     }
 
     public void switchLevel(Level nextLevel) {
