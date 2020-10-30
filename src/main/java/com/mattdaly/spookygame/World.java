@@ -86,6 +86,10 @@ public class World {
                         Pit pit = new Pit(x, y);
                         backgroundEntities.add(pit);
                         break;
+                    case "S": //button/switch
+                        Switch switchy = new Switch(x, y);
+                        backgroundEntities.add(switchy);
+                        break;
                     case "H": //BODY WITH HEAD
                         SkeletonHead head = new SkeletonHead(null, x, y);
                         SkeletonBody bodyWithHead = new SkeletonBody(x, y, head);
