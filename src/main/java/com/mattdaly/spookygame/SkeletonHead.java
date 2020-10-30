@@ -51,6 +51,10 @@ public class SkeletonHead extends Entity {
         }
 
         super.update();
+
+        //override z-index calculation if attached to body
+        if(lastBody.hasHead)
+            zIndex = lastBody.zIndex;
     }
 
     public void breakHead() {

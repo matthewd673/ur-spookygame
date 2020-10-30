@@ -8,6 +8,7 @@ package com.mattdaly.spookygame;
 
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class World {
 
@@ -43,6 +44,15 @@ public class World {
         }
     }
 
+    public void placeGrass(int grassCt, int x, int y, int w, int h) {
+        for(int i = 0; i < grassCt; i++) {
+            float gX = (ThreadLocalRandom.current().nextFloat() * w) + x;
+            float gY = (ThreadLocalRandom.current().nextFloat() * h) + y;
+            Grass grass = new Grass(gX, gY);
+            Main.entityManager.addEntity(grass);
+        }
+    }
+
     public void placeGraves(int graveCt) {
         for(int i = 0; i < graveCt; i++) {
             float gX = rng.nextFloat() * w;
@@ -73,6 +83,7 @@ public class World {
                     case "d": //DIRT
                         Dirt dirt = new Dirt(x, y);
                         backgroundEntities.add(dirt);
+                        placeGrass(6, x, y, 32, 32);
                         break;
                     case "g": //GRASS
                         GrassyDirt gd = new GrassyDirt(x, y);

@@ -3,6 +3,9 @@ package com.mattdaly.spookygame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class RenderSurface extends JComponent {
 
@@ -12,6 +15,9 @@ public class RenderSurface extends JComponent {
     int h;
 
     boolean drawColliders = false;
+
+    Comparator<Entity> compareByZIndex = (Entity o1, Entity o2) ->
+            o1.zIndex.compareTo(o2.zIndex);
 
     public RenderSurface(Camera cam) {
         this.cam = cam;
@@ -23,6 +29,8 @@ public class RenderSurface extends JComponent {
         //begin draw calls
         //draw clear color
         fillRectangle(g, new Rectangle(0, 0, w, h), Color.WHITE);
+
+        Collections.sort(Main.entityManager.entityList, compareByZIndex);
 
         for(Entity e : Main.entityManager.entityList) {
             e.render(g);

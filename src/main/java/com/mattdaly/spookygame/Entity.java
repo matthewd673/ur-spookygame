@@ -2,6 +2,7 @@ package com.mattdaly.spookygame;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Comparator;
 
 public class Entity {
 
@@ -31,6 +32,9 @@ public class Entity {
 
     public EntityType eType;
 
+    public boolean forceBackSort = false;
+    public Integer zIndex = 0;
+
     public Entity(EntityType eType, BufferedImage sprite, Vector2 pos, int w, int h) {
         this.eType = eType;
         this.sprite = sprite;
@@ -46,6 +50,8 @@ public class Entity {
             this.h = h;
 
         Velocity v = new Velocity(0, 0);
+
+        calculateZIndex();
     }
 
     public void setCollider(Collider col) {
@@ -62,6 +68,15 @@ public class Entity {
             col.x = pos.x + col.offX;
             col.y = pos.y + col.offY;
         }
+
+        calculateZIndex();
+    }
+
+    public void calculateZIndex() {
+        if(!forceBackSort)
+            zIndex = (int)(pos.y + h);
+        else
+            zIndex = -9999;
     }
 
     public boolean move(float newX, float newY, Collider c) {
